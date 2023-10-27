@@ -20,7 +20,7 @@ public class Main {
         try {
             pathOutDir = Files.createDirectories(
                     Path.of(
-                            Main.class.getResource("").getPath(),
+                            new File(Main.class.getResource("").getFile()).getAbsolutePath(),
                             PATH_OUT_DIR,
                             String.valueOf(System.currentTimeMillis()))
             );
