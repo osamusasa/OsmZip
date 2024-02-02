@@ -63,4 +63,76 @@ zipFile.fds.forEach((fd)->System.out.println(new String(fd.getData())));
 
         return zipFile;
     }
+
+    /**
+     * End of central directory record の ディスクの総数を返す。
+     *
+     * @return ディスクの総数
+     */
+    public int getNumberOfDisk() {
+        return eocd.getNumberOfDisk();
+    }
+
+    /**
+     * Retrieves the number of the disk on which the first Central Directory (CD) starts.
+     *
+     * @return The number of the disk on which the first CD starts.
+     */
+    public int getNumberOfDiskFirstCD() {
+        return eocd.getNumberOfDiskFirstCD();
+    }
+
+    /**
+     * Retrieves the total number of Central Directory (CD) records present on the disk.
+     *
+     * @return The total number of CD records on the disk.
+     */
+    public int getTotalNumberOfCDOnDisk() {
+        return eocd.getTotalNumberOfCDOnDisk();
+    }
+
+    /**
+     * Retrieves the total number of Central Directory (CD) records.
+     *
+     * @return The total number of CD records.
+     */
+    public int getTotalNumberOfCD(){
+        return eocd.getTotalNumberOfCD();
+    }
+
+    /**
+     * Retrieves the total size of all Central Directory (CD) records.
+     *
+     * @return The total size of all CD records.
+     */
+    public long getSizeOfTotalCD() {
+        return eocd.getSizeOfTotalCD();
+    }
+
+    /**
+     * Retrieves the offset of the first Central Directory (CD) record.
+     *
+     * @return The offset of the first CD record.
+     */
+    public long getOffsetFirstCD() {
+        return eocd.getOffsetFirstCD();
+    }
+
+    /**
+     * Retrieves the length of the .ZIP file comment.
+     *
+     * @return The length of the .ZIP file comment.
+     */
+    public int getLengthZipComment() {
+        return eocd.getLengthZipComment();
+    }
+
+    /**
+     * Retrieves the .ZIP file comment.
+     *
+     * @return The .ZIP file comment.
+     */
+    public String getZipComment() {
+        return eocd.getZipComment();
+    }
 }
