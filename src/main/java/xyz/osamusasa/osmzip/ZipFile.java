@@ -7,6 +7,7 @@ import xyz.osamusasa.osmzip.element.FileData;
 import xyz.osamusasa.osmzip.element.LocalFileHeader;
 import xyz.osamusasa.osmzip.io.OsmZipIOException;
 import xyz.osamusasa.osmzip.io.ZipReader;
+import xyz.osamusasa.osmzip.util.LocalFileHeaderAccessor;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -134,5 +135,39 @@ zipFile.fds.forEach((fd)->System.out.println(new String(fd.getData())));
      */
     public String getZipComment() {
         return eocd.getZipComment();
+    }
+
+    /**
+     * Retrieves the LocalFileHeaderAccessor object for the file at the specified index.
+     * TODO: FileDescription(FileMetaData)　みたいな形で、公開できるクラスでさらにラップして返したい。
+     *       デフォルト値とかも設定できるような感じで
+     *
+     * @param index the index of the file in the ZipFile
+     * @return the LocalFileHeaderAccessor object for the file
+     */
+    public LocalFileHeaderAccessor getFile(int index) {
+        return new LocalFileHeaderAccessor(lfhs.get(index));
+    }
+
+    /**
+     * Calculates the length of the local file header.
+     * The local file header is a part of the ZIP file format that contains
+     * metadata about a specific file within the ZIP archive.
+     *
+     * @return The length of the local file header in bytes.
+     */
+    public int lengthOfLocalFileHeader() {
+        return lfhs.size();
+    }
+
+    /**
+     * Retrieves the content of a file as a string.
+     * TODO: 圧縮してあるパターンとか、文字コードとかいろんなパターンに対応が必要
+     *
+     * @param index the index of the file in the ZipFile
+     * @return the content of the file as a string
+     */
+    public String getFileContentAsString(int index) {
+        return new String(fds.get(index).getData());
     }
 }
